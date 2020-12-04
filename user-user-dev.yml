@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: user
+  cloud:
+    config:
+      discovery:
+        enable: true
+      serviceId: register-server
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/quan_xian?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 802323
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 8023
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.cloud.client.ip-address}
+    instance-id: http://${spring.cloud.client.ip-address}:${server.port}
+mybatis:
+  type-aliases-package: com.wty.entity
+  mapper-locations: classpath:mapper/*Dao.xml
